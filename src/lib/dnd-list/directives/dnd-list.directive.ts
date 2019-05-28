@@ -29,6 +29,7 @@ export class DndListDirective implements OnInit {
    @Output() dndListChange = new EventEmitter<any>();
 
    @Output() dndDragover = new EventEmitter<DndListEvent>();
+   @Output() dndDragLeave = new EventEmitter<DndListEvent>();
    @Output() dndDrop = new EventEmitter<DndListEvent>();
    @Output() dndInserted = new EventEmitter<DndListEvent>();
 
@@ -218,6 +219,7 @@ export class DndListDirective implements OnInit {
       } else {
          this._stopDragover();
       }
+      this.dndDragLeave.emit(this._getEventResponse(event, dropEffect, itemType));
    }
 
    @HostListener('mouseleave', ['$event'])
